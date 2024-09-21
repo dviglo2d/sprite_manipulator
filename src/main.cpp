@@ -160,14 +160,14 @@ i32 main(i32 argc, char* argv[])
     if (argc != 4)
     {
         cout << "Использование: sprite_expander число_пикселей входной_файл выходной_файл" << endl;
-        return 1;
+        return 0;
     }
 
     i32 num_pixels = atoi(argv[1]);
 
     if (num_pixels < 0)
     {
-        cout << "Ошибка: num_pixels < 0" << endl;
+        cerr << "Ошибка: num_pixels < 0" << endl;
         return 1;
     }
 
@@ -175,7 +175,7 @@ i32 main(i32 argc, char* argv[])
 
     if (src.empty())
     {
-        cout << "Ошибка: src.empty()" << endl;
+        cerr << "Ошибка: src.empty()" << endl;
         return 1;
     }
 
