@@ -5,8 +5,6 @@
 #include <clocale> // std::setlocale
 #endif
 
-#include <iostream>
-
 #define STB_IMAGE_IMPLEMENTATION
 #define STBI_WINDOWS_UTF8
 #include <stb_image.h>
@@ -15,6 +13,8 @@
 #define STBIW_WINDOWS_UTF8
 #include <stb_image_write.h>
 
+#include "dviglo/fs/fs_base.hpp"
+#include "dviglo/fs/log.hpp"
 #include "dviglo/std_utils/string.hpp"
 
 using namespace dviglo;
@@ -149,38 +149,30 @@ public:
     }
 };
 
-i32 main(i32 argc, char* argv[])
+i32 main()
 {
 #ifdef _WIN32
     // Меняем кодировку консоли
     setlocale(LC_CTYPE, "en_US.UTF-8");
 #endif
 
-    // Первый аргумент - запускаемый файл
-    if (argc != 4)
-    {
-        cout << "Использование: sprite_expander число_пикселей входной_файл выходной_файл" << endl;
-        return 0;
-    }
+    StrUtf8 base_path = get_base_path();
+    Log log(base_path + "log.txt");
 
-    i32 num_pixels = atoi(argv[1]);
+    StrUtf8 src_image_path = base_path + "src_image.png";
+    StrUtf8 exp_image_path = base_path + "exp_image.png";
+    i32 border_size = 2;
 
-    if (num_pixels < 0)
-    {
-        cerr << "Ошибка: num_pixels < 0" << endl;
-        return 1;
-    }
-
-    Image src = Image::from_file(argv[2]);
+    Image src = Image::from_file(src_image_path.c_str());
 
     if (src.empty())
     {
-        cerr << "Ошибка: src.empty()" << endl;
+        DV_LOG->write_error("src.empty()");
         return 1;
     }
 
-    Image result = src.expand(num_pixels);
-    result.save(argv[3]);
+    Image result = src.expand(border_size);
+    result.save(exp_image_path.c_str());
 
     return 0;
 }

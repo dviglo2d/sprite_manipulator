@@ -27,7 +27,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 add_subdirectory(third_party/stb)
 
 # Название проекта
-project(sprite_expander)
+project(sprite_manipulator)
 
 # Версия стандарта C++
 set(CMAKE_CXX_STANDARD 20)
@@ -42,7 +42,7 @@ if(MSVC)
 endif()
 
 # Название таргета
-set(target_name sprite_expander)
+set(target_name sprite_manipulator)
 
 # Создаём список файлов
 file(GLOB_RECURSE source_files src/*.cpp src/*.hpp)
