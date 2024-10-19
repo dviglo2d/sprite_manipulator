@@ -13,9 +13,9 @@
 #define STBIW_WINDOWS_UTF8
 #include <stb_image_write.h>
 
-#include "dviglo/fs/fs_base.hpp"
-#include "dviglo/fs/log.hpp"
-#include "dviglo/std_utils/string.hpp"
+#include <dviglo/fs/fs_base.hpp>
+#include <dviglo/fs/log.hpp>
+#include <dviglo/std_utils/string.hpp>
 
 using namespace dviglo;
 using namespace std;
